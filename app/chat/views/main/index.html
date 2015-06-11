@@ -12,7 +12,7 @@
         {{ other_users.each do |user|}}
           I can see {{user._name}}
         {{ end }}
-        {{ _users.each do |user|}}
+        {{ other_users.each do |user|}}
           {{ if user._id != Volt.current_user._id }}
             <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
               {{user._name}}
