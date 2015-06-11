@@ -17,7 +17,7 @@ module Chat
     end
 
     def other_users
-      _users.reject{|user| user._id == Volt.current_user._id }
+      _users.select{|user| user._id != Volt.current_user._id }
     end
 
     def select_conversation(user)
