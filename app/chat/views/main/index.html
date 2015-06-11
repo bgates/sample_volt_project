@@ -6,7 +6,7 @@
   {{ if Volt.current_user }}
     <div class="row">
       <div class="col-md-4">
-        {{ other_users;other_users.each do |user|}}
+        {{ other_users.each do |user|}}
           <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
             {{user._name}}
             {{ if unseen_messages_from?(user) }}
@@ -16,7 +16,10 @@
             {{ end }}
           </div>
         {{ end }}
-        
+
+        {{ other_users.each do |user|}}
+              {{user._name}} is in the next little loop
+        {{ end }}
       </div>
       {{ if params._user_id }}
         <div class="col-md-8 well conversation">
