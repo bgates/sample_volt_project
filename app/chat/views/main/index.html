@@ -8,25 +8,18 @@
       <div class="col-md-4">
         {{ _users.each do |user|}}
           {{ if user._id != Volt.current_user._id }}
-            <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
-              {{user._name}} is a gimmme
-              {{ if unread_notifications_from(user).count > 0 }}
-                <span class="badge">
-                  {{ unread_notifications_from(user).count }}
-                </span>
-              {{ end }}
-            </div>
+
           {{ end }}
         {{ end }}
         {{ other_users.each do |user|}}
-            <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
-              {{user._name}}
-              {{ if unread_notifications_from(user).count > 0 }}
-                <span class="badge">
-                  {{ unread_notifications_from(user).count }}
-                </span>
-              {{ end }}
-            </div>
+          <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
+            {{user._name}}
+            {{ if unseen_messages_from?(user) }}
+              <span class="badge">
+                {{ unread_notifications_from(user).count }}
+              </span>
+            {{ end }}
+          </div>
         {{ end }}
       </div>
       {{ if params._user_id }}

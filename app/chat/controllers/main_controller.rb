@@ -35,7 +35,7 @@ module Chat
                             receiver_id: Volt.current_user._id })
     end
     
-    def unseen_messages_from(user)
+    def unseen_messages_from?(user)
       unread_notifications_from(user).count > 0 && 
       params._user_id != user._id
     end
