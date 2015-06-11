@@ -16,6 +16,10 @@ module Chat
        #{params._action || 'index'}"
     end
 
+    def other_users
+      _users.reject{|user| user._id == Volt.current_user._id }
+    end
+
     def select_conversation(user)
       params._user_id = user._id
       unread_notifications_from(user).then do |results|
@@ -31,6 +35,11 @@ module Chat
                             receiver_id: Volt.current_user._id })
     end
     
+    def unseen_messages_from(user)
+      unread_notifications_from(user).count > 0 && 
+      params._user_id != user._id
+    end
+
     def current_conversation
       _messages.find({ "$or" => [{ sender_id: Volt.current_user._id, 
                                    receiver_id: params._user_id }, 

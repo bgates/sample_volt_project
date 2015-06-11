@@ -6,17 +6,15 @@
   {{ if Volt.current_user }}
     <div class="row">
       <div class="col-md-4">
-        {{ _users.each do |user| }}
-          {{ if user._id != Volt.current_user._id }}
-            <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
-              {{user._name}}
-              {{ if unread_notifications_from(user).count > 0 }}
-                <span class="badge">
-                  {{ unread_notifications_from(user).count }}
-                </span>
-              {{ end }}
-            </div>
-          {{ end }}
+        {{ other_users.each do |user| }}
+          <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
+            {{user._name}}
+            {{ if unseen_messages_from?(user) }}
+              <span class="badge">
+                {{ unread_notifications_from(user).count }}
+              </span>
+            {{ end }}
+          </div>
         {{ end }}
       </div>
       {{ if params._user_id }}
@@ -27,7 +25,7 @@
             </div>
           {{ end }}
    
-          {{ if current_conversation.count == 0 }}
+          {{ if current_conversation.empty? }}
             <p>You have no messages yet. Start chatting!</p>
           {{ else }}
             <div class="clearfix"></div>
