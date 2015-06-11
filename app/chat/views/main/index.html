@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-4">
         {{ _users.each do |user|}}
-              {{user._name}} with _users
+              
         {{ end }}
         {{ other_users.each do |user|}}
           <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
