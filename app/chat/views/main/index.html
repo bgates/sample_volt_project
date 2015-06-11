@@ -6,6 +6,9 @@
   {{ if Volt.current_user }}
     <div class="row">
       <div class="col-md-4">
+        {{ _users.reject{|user| user._id != Volt.current_user._id }.each do |user| }}
+          there is still {{user._name}}
+        {{ end }}
         {{ _users.each do |user| }}
           {{ if user._id != Volt.current_user._id }}
             <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
