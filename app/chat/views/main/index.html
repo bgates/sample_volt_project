@@ -27,7 +27,6 @@
           {{ end }}
         {{ end }}
         {{ other_users.each do |user|}}
-          {{ if user._id != Volt.current_user._id }}
             <div class="contact {{ if params._user_id == user._id }} active {{ end }}" e-click="select_conversation(user)">
               {{user._name}}
               {{ if unread_notifications_from(user).count > 0 }}
@@ -36,7 +35,6 @@
                 </span>
               {{ end }}
             </div>
-          {{ end }}
         {{ end }}
       </div>
       {{ if params._user_id }}
